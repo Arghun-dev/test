@@ -20,3 +20,12 @@ Now most probably you will get this error =>
    test("it works", () => {});
   ```
   Jest could find a test file, and the error went out.
+  
+  
+  
+  
+  Now I have a function called `getFormattedValue` and I want to test it, to the this function inside my test file, I have to import the function inside test file, and if I import it, I will get this error
+  
+  `Jest suit failed to run`
+  
+  this usually means that you are trying to import a file which `Jest` cannot parse, It's not plain JavaScript.
