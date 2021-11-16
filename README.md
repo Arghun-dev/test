@@ -13,3 +13,10 @@ Now most probably you will get this error =>
   testRegex:  - 0 matches`
   
   Because, you don't have any test file, and jest couldn't fand any test file.
+  
+  Now, according to the `testMatch` if you create `__tests__/example.js`
+  
+  ```js
+   test("it works", () => {});
+  ```
+  Jest could find a test file, and the error went out.
