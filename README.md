@@ -24,8 +24,10 @@ Now most probably you will get this error =>
   
   
   
-  Now I have a function called `getFormattedValue` and I want to test it, to the this function inside my test file, I have to import the function inside test file, and if I import it, I will get this error
+  Now I have a function called `getFormattedValue` and I want to test it, to the this function inside my test file, I have to import the function inside test file, and if I import it, I will get this error: => **SyntaxError: Unexpected token**
   
   `Jest suit failed to run`
+  
+  What's going on here, is that `Jest` runs in node, but `node` does not support `import` statements. we have to compile our `import` statements, we compile our import statements using `webpack`, `webpack` understands the `import` statements by default, and we have webpack configured further, with the babel loader, so it compiles everything out that isn't supported by the browser that we don't support.
   
   this usually means that you are trying to import a file which `Jest` cannot parse, It's not plain JavaScript.
