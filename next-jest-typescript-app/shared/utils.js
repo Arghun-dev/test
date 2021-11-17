@@ -1,0 +1,1 @@
+function getFormattedValue(value, match) {}
