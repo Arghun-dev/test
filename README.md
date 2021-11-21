@@ -109,3 +109,38 @@ test('renders', () => {
   render(<AutoScaligText />)
 })
 ```
+
+## How to use debug method
+
+```js
+import React from 'react';
+import {render} from '@testing-library/react';
+import AutoScalingText from '../AutoSclaingText.js';
+
+test('renders', () => {
+  const {debug} = render(<AutoScaligText />);
+  debug();
+})
+```
+
+now if your component has a className which I have written it like this: `className={style.test}`, now if you look at your cosole you'll see that className isn't log into the console, why this happens?
+
+because, we said that our `.css` files would map into the `style-mock.js` which is exporting an empty module, so in our console, the className would be undefined, so how could we resolve this issue, because we will need it in the future,
+
+Do this:
+
+`$. npm i -D identity-obj-proxy`
+
+inside `jest.config.js`
+
+the order inside `moduleNameMapper` is important.
+
+```js
+module.exports = {
+  testEnvironemnt: 'jest-environment-jsdom',
+  moduleNameMapper: {
+    '\\.module\\.css$': 'identity-obj-proxy',
+    '\\.css$': require.resolve('./test/style-mock.js'),
+  }
+}
+```
