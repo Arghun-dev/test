@@ -31,3 +31,5 @@ Now most probably you will get this error =>
   What's going on here, is that `Jest` runs in node, but `node` does not support `import` statements. we have to compile our `import` statements, we compile our import statements using `webpack`, `webpack` understands the `import` statements by default, and we have webpack configured further, with the babel loader, so it compiles everything out that isn't supported by the browser that we don't support.
   
   this usually means that you are trying to import a file which `Jest` cannot parse, It's not plain JavaScript.
+  
+  The trick here, is that in our `babelrc.js`, we're configuring our `@babel/preset-env` to not compile the `modules`, so that `webpack` can manage those, `Jest` is actually automatically, is picking up this `babel configuration` and applying it to our `test` code
