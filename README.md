@@ -92,3 +92,7 @@ module.exports = {}
 and create a directory of `test/style-mock.js`
 
 with doing this you are resolving every module that ends with `.css` to a different module to `style-mock.js` instead.
+
+now if we run `$. npm t` everything will work out.
+
+So, now when `Jest` comes across a file that matches this `\\.css$` instead of requiring a file that matches that, it's going to require this file => `./test/style-mock.js`
