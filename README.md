@@ -57,3 +57,38 @@ module.exports = {
   plugins: ["@babel/plugin-transform-runtime"],
 };
  ```
+
+**Jest** has a lot of awesome things by default, and one those awesome things, is it simulates it's browser environment in `Node`, using the module called `jsdom`.
+
+`jest.config.js`
+
+```js
+module.exports = {
+  testEnvironment: 'jest-environment-jsdom',
+}
+```
+
+If you're gonna test a component which uses a `css` file, then in this case you'll get an error when you run the test using `npm t`, it's actually an issue in, mocking a js module, we're getting a `syntax error unexpected token .` when we want to import a `.css` file.
+
+what's going on here, `Jest` is trying to require this file (.css) like a `common.js` module, and clearly this is not a `common.js` module, this is a `css` file, and that's why we're running into this syntax error, so what we're gonna do, is using this `moduleNameMapper` suggestion, so we can map modules that ending up with `.css` to a different module, a `mocked` version of that module.
+
+so inside `jest.config.js` file:
+
+```js
+module.exports = {
+  testEnvironment: 'jest-environment-jsdom',
+  moduleNameMapper: {
+    '\\.css$': require.resolve('./test/style-mock.js')
+  }
+}
+```
+
+`test/style-mock.js`
+
+```js
+module.exports = {}
+```
+
+and create a directory of `test/style-mock.js`
+
+with doing this you are resolving every module that ends with `.css` to a different module to `style-mock.js` instead.
