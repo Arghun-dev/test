@@ -144,3 +144,7 @@ module.exports = {
   }
 }
 ```
+
+### What does `identity-obj-proxy` do?
+
+with doing `'\\.module\\.css$': 'identity-obj-proxy'` instead of importing this `./AutoScaling.module.css` module, it's going to import `identity-obj-proxy`, and with that it's going to do, is that it will return a string for the path that was accessed for this particular module.
