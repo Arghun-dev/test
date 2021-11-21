@@ -32,4 +32,28 @@ Now most probably you will get this error =>
   
   this usually means that you are trying to import a file which `Jest` cannot parse, It's not plain JavaScript.
   
-  The trick here, is that in our `babelrc.js`, we're configuring our `@babel/preset-env` to not compile the `modules`, so that `webpack` can manage those, `Jest` is actually automatically, is picking up this `babel configuration` and applying it to our `test` code
+  The trick here, is that in our `babelrc.js`, we're configuring our `@babel/preset-env` to not compile the `modules`, so that `webpack` can manage those, `Jest` is actually automatically, is picking up this `babel configuration` and applying it to our `test` code.
+  
+ finally our `babelrc.js` file should be this:
+ 
+ ```js
+ const isTest = String(process.env.NODE_ENV) === "test";
+const isProd = String(process.env.NODE_ENV) === "production";
+
+module.exports = {
+  presets: [
+    ["@babel/preset-env", { modules: isTest ? "commonjs" : false }],
+    "@babel/preset-react",
+    [
+      "@emotion/babel-preset-css-prop",
+      {
+        hoist: isProd,
+        sourceMap: !isProd,
+        autoLabel: isProd ? "never" : "always",
+        labelFormat: "[filename]--[local]",
+      },
+    ],
+  ],
+  plugins: ["@babel/plugin-transform-runtime"],
+};
+ ```
